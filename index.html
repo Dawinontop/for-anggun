@@ -1,0 +1,808 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Anggun ♡</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&display=swap');
+
+:root {
+    --bg: #fff5f7;
+    --pink: #ff6b96;
+    --dark-pink: #e94f80;
+    --text: #573744;
+    --muted: #987b87;
+    --white: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background:
+        radial-gradient(circle at 15% 20%, #ffe1eb 0, transparent 35%),
+        radial-gradient(circle at 85% 80%, #fce4ff 0, transparent 35%),
+        var(--bg);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.card {
+    width: 100%;
+    max-width: 520px;
+    min-height: 560px;
+    background: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-radius: 28px;
+    padding: 40px 30px;
+    box-shadow: 0 20px 70px rgba(183, 103, 135, 0.12);
+    backdrop-filter: blur(15px);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-container {
+    width: 100%;
+    height: 5px;
+    background: #f7e3eb;
+    border-radius: 20px;
+    margin-bottom: 35px;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #ff8bad, #ff5e93);
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+.page {
+    display: none;
+    animation: fadeIn 0.5s ease;
+}
+
+.page.active {
+    display: block;
+}
+
+.emoji {
+    font-size: 55px;
+    margin-bottom: 22px;
+    display: block;
+    animation: float 3s ease-in-out infinite;
+}
+
+h1, h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 36px;
+    line-height: 1.3;
+    margin-bottom: 20px;
+}
+
+h2 {
+    font-size: 29px;
+    line-height: 1.4;
+    margin-bottom: 18px;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+
+.highlight {
+    color: var(--dark-pink);
+    font-weight: 700;
+}
+
+.italic {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: var(--dark-pink);
+}
+
+.small {
+    font-size: 13px;
+    opacity: 0.8;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+button {
+    border: none;
+    border-radius: 50px;
+    padding: 14px 26px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.next-btn, .yes-btn {
+    background: linear-gradient(135deg, #ff85a8, #f35489);
+    color: white;
+    box-shadow: 0 8px 20px rgba(243,84,137,0.25);
+}
+
+.next-btn:hover, .yes-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(243,84,137,0.35);
+}
+
+.back-btn {
+    background: #fff0f5;
+    color: #b77d91;
+}
+
+.heart {
+    color: #ff6b96;
+}
+
+.quote {
+    padding: 18px;
+    background: #fff5f8;
+    border-radius: 18px;
+    margin: 20px 0;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: #c05c80;
+    line-height: 1.7;
+}
+
+.final-question {
+    font-size: 34px;
+    margin-bottom: 15px;
+}
+
+.proposal-buttons {
+    position: relative;
+    min-height: 100px;
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.no-btn {
+    background: #eee;
+    color: #888;
+    position: relative;
+    transition: left 0.15s, top 0.15s;
+}
+
+.celebration {
+    display: none;
+    animation: fadeIn 0.7s ease;
+}
+
+.celebration.show {
+    display: block;
+}
+
+.celebration h1 {
+    color: #ed5389;
+}
+
+.footer {
+    position: absolute;
+    bottom: 18px;
+    left: 0;
+    right: 0;
+    font-size: 11px;
+    color: #c7a6b4;
+}
+
+.floating-heart {
+    position: fixed;
+    pointer-events: none;
+    z-index: 999;
+    animation: heartFloat 3s linear forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes heartFloat {
+    from { transform: translateY(0) rotate(0deg); opacity: 1; }
+    to { transform: translateY(-200px) rotate(30deg); opacity: 0; }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 30px 22px;
+        min-height: 590px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 25px;
+    }
+
+    p {
+        font-size: 15px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <div class="progress-container">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- PAGE 1 -->
+    <section class="page active">
+        <span class="emoji">💌</span>
+
+        <h1>Hey, Anggun.</h1>
+
+        <p>
+            So... I made you something.
+        </p>
+
+        <p>
+            And no, it's not a medical prescription,
+            although I know you're gonna be a doctor someday.
+        </p>
+
+        <p class="small">
+            Please don't judge my coding skills.
+            I put more effort into this than I probably should admit.
+        </p>
+
+        <div class="buttons">
+            <button class="next-btn" onclick="nextPage()">
+                Open it ♡
+            </button>
+        </div>
+    </section>
+
+
+    <!-- PAGE 2 -->
+    <section class="page">
+        <span class="emoji">🌙</span>
+
+        <h2>November 12, 2026</h2>
+
+        <p>
+            The day I met you on Voisa.
+        </p>
+
+        <p>
+            I never expected a random voice chat
+            to introduce me to someone who would
+            become this special to me.
+        </p>
+
+        <p>
+            One random conversation, one random girl,
+            and somehow you became
+            <span class="highlight">my favorite person to talk to.</span>
+        </p>
+
+        <div class="quote">
+            Funny how someone you meet by chance
+            can become someone you wish you had met sooner.
+        </div>
+
+        <div class="buttons">
+            <button class="back-btn" onclick="prevPage()">← Back</button>
+            <button class="next-btn" onclick="nextPage()">Next →</button>
+        </div>
+    </section>
+
+
+    <!-- PAGE 3 -->
+    <section class="page">
+        <span class="emoji">🦋</span>
+
+        <h2>And then there's you...</h2>
+
+        <p>
+            Anggun, you're genuinely adorable.
+        </p>
+
+        <p>
+            Like, seriously, how can someone be
+            this pretty and still have such a beautiful personality?
+        </p>
+
+        <p>
+            You're smart, your English is ridiculously good,
+            and I could honestly listen to you talk for hours.
+        </p>
+
+        <p>
+            And I'm not even gonna lie...
+            <span class="highlight">
+                you're ridiculously attractive.
+            </span>
+        </p>
+
+        <p class="small">
+            Okay, I might be a little obsessed with your face. ♡
+        </p>
+
+        <div class="buttons">
+            <button class="back-btn" onclick="prevPage()">← Back</button>
+            <button class="next-btn" onclick="nextPage()">Next →</button>
+        </div>
+    </section>
+
+
+    <!-- PAGE 4 -->
+    <section class="page">
+        <span class="emoji">🤍</span>
+
+        <h2>But it's more than that.</h2>
+
+        <p>
+            What I really like about you isn't just
+            how beautiful you are.
+        </p>
+
+        <p>
+            It's your kind heart.
+            The way you take care of me,
+            the way you make me feel comfortable,
+            and how talking to you somehow makes
+            my days a little better.
+        </p>
+
+        <p>
+            I notice the little things you do, Anggun.
+            And they mean more to me than you probably realize.
+        </p>
+
+        <div class="quote">
+            Your beauty caught my attention,
+            but your heart is what makes me fall for you.
+        </div>
+
+        <div class="buttons">
+            <button class="back-btn" onclick="prevPage()">← Back</button>
+            <button class="next-btn" onclick="nextPage()">Next →</button>
+        </div>
+    </section>
+
+
+    <!-- PAGE 5 -->
+    <section class="page">
+        <span class="emoji">🩺</span>
+
+        <h2>My future doctor</h2>
+
+        <p>
+            I know you're working hard to finish college
+            and become a doctor.
+        </p>
+
+        <p>
+            And honestly, I'm so proud of you,
+            even if I'm not there to see every little step.
+        </p>
+
+        <p>
+            I hope you know how capable you are.
+            I hope you never doubt yourself too much,
+            and I hope you achieve everything
+            you've been dreaming of.
+        </p>
+
+        <p>
+            I wanna be someone who celebrates your victories,
+            comforts you on your bad days,
+            and reminds you how amazing you are
+            whenever you forget.
+        </p>
+
+        <p class="italic">
+            I'll be cheering for you, even from miles away.
+        </p>
+
+        <div class="buttons">
+            <button class="back-btn" onclick="prevPage()">← Back</button>
+            <button class="next-btn" onclick="nextPage()">Next →</button>
+        </div>
+    </section>
+
+
+    <!-- PAGE 6: LDR -->
+    <section class="page">
+        <span class="emoji">🌍🤍</span>
+
+        <h2>About this distance...</h2>
+
+        <p>
+            I know we're miles apart right now.
+            We can't just randomly meet,
+            hold hands, or go on little dates whenever we want.
+        </p>
+
+        <p>
+            Sometimes I wish I could just teleport to you
+            whenever I miss you.
+            No airports, no long journeys,
+            just me showing up at your door.
+        </p>
+
+        <p>
+            But even with all this distance,
+            I still want to get to know you,
+            make memories with you,
+            and be a part of your everyday life.
+        </p>
+
+        <div class="quote">
+            You're far away from me,
+            but somehow you've found a place
+            really close to my heart.
+        </div>
+
+        <div class="buttons">
+            <button class="back-btn" onclick="prevPage()">← Back</button>
+            <button class="next-btn" onclick="nextPage()">Next →</button>
+        </div>
+    </section>
+
+
+    <!-- PAGE 7: MEETING -->
+    <section class="page">
+        <span class="emoji">🥹💋</span>
+
+        <h2>When I finally meet you...</h2>
+
+        <p>
+            I honestly can't wait for the day
+            I finally get to see you in person.
+        </p>
+
+        <p>
+            No more staring at a screen,
+            no more saying goodnight through a phone,
+            no more imagining what it would feel like
+            to have you right next to me.
+        </p>
+
+        <p>
+            I wanna hug you for a really long time,
+            hold your hand while we walk,
+            look into your eyes,
+            and finally kiss you.
+        </p>
+
+        <p class="italic">
+            And when that moment comes,
+            I hope I get to kiss you
+            as passionately as I've been imagining.
+        </p>
+
+        <div class="quote">
+            Until then, I'll keep counting down
+            to the day distance is no longer between us. ♡
+        </div>
+
+        <div class="buttons">
+            <button class="back-btn" onclick="prevPage()">← Back</button>
+            <button class="next-btn" onclick="nextPage()">Next →</button>
+        </div>
+    </section>
+
+
+    <!-- PAGE 8: CONFESSION -->
+    <section class="page">
+        <span class="emoji">✨</span>
+
+        <h2>A little confession...</h2>
+
+        <p>
+            I know we've only known each other for a little while.
+            I'm not gonna pretend I already know everything about you.
+        </p>
+
+        <p>
+            But I know that I genuinely like you, Anggun.
+            I like hearing your voice,
+            talking about random things,
+            making you laugh,
+            and finding reasons to spend more time with you.
+        </p>
+
+        <p>
+            I don't want to rush something beautiful.
+            I just want us to keep choosing to get to know each other,
+            to be honest with each other,
+            and see where this takes us.
+        </p>
+
+        <p class="italic">
+            And hopefully, someday soon,
+            we'll get to turn all these virtual moments
+            into real ones.
+        </p>
+
+        <div class="buttons">
+            <button class="back-btn" onclick="prevPage()">← Back</button>
+            <button class="next-btn" onclick="nextPage()">One last thing... →</button>
+        </div>
+    </section>
+
+
+    <!-- PAGE 9: PROPOSAL -->
+    <section class="page" id="proposal">
+
+        <span class="emoji">💗</span>
+
+        <h2 class="final-question">
+            So, Anggun...
+        </h2>
+
+        <p>
+            After all these late-night conversations,
+            all these smiles through a screen,
+            and all these feelings I've been keeping...
+        </p>
+
+        <h1>
+            Will you be<br>
+            my girlfriend?
+        </h1>
+
+        <p class="italic">
+            I want you, not just on my screen,
+            but in my life.
+        </p>
+
+        <div class="proposal-buttons" id="proposalArea">
+
+            <button class="yes-btn" onclick="sayYes()">
+                Yes, I will! ♡
+            </button>
+
+            <button class="no-btn" id="noBtn">
+                No 🙃
+            </button>
+
+        </div>
+
+        <p class="small" id="hint">
+            choose wisely, pretty girl.
+        </p>
+
+        <div class="buttons">
+            <button class="back-btn" onclick="prevPage()">← Back</button>
+        </div>
+
+    </section>
+
+
+    <!-- YES CELEBRATION -->
+    <section class="celebration" id="celebration">
+
+        <span class="emoji">🥹💖</span>
+
+        <h1>WAIT... REALLY?!</h1>
+
+        <h2>YOU SAID YES!</h2>
+
+        <p>
+            Anggun, you have no idea how happy you just made me.
+        </p>
+
+        <p>
+            I guess this means I get to annoy you,
+            flirt with you,
+            care for you,
+            listen to all your stories,
+            and cheer you on while you become
+            the coolest doctor ever.
+        </p>
+
+        <div class="quote">
+            November 12 was the day I met you.<br>
+            And today is the day<br>
+            we begin something special. ♡
+        </div>
+
+        <h2 class="highlight">
+            You're my girl now. 🫶
+        </h2>
+
+        <p>
+            Even if we're miles apart,
+            I want to make you feel loved,
+            appreciated, and cared for.
+        </p>
+
+        <p>
+            And someday, when I finally get to see you,
+            I'm gonna hug you so tight,
+            hold your face in my hands,
+            look at you for a moment,
+            and kiss you like I've been waiting
+            forever for that moment.
+        </p>
+
+        <p class="italic">
+            I can't wait to make that day happen, Anggun. 💋
+        </p>
+
+    </section>
+
+    <div class="footer">
+        made for Anggun, with love & a little courage ♡
+    </div>
+
+</div>
+
+
+<script>
+
+let currentPage = 0;
+
+const pages = document.querySelectorAll('.page');
+const progress = document.getElementById('progress');
+
+function updatePage() {
+    pages.forEach((page, index) => {
+        page.classList.toggle('active', index === currentPage);
+    });
+
+    progress.style.width =
+        ((currentPage + 1) / pages.length * 100) + '%';
+
+    createHearts(2);
+}
+
+function nextPage() {
+    if (currentPage < pages.length - 1) {
+        currentPage++;
+        updatePage();
+    }
+}
+
+function prevPage() {
+    if (currentPage > 0) {
+        currentPage--;
+        updatePage();
+    }
+}
+
+
+// The NO button refuses to cooperate
+
+const noBtn = document.getElementById('noBtn');
+const proposalArea = document.getElementById('proposalArea');
+
+function moveNoButton() {
+
+    const area = proposalArea.getBoundingClientRect();
+    const button = noBtn.getBoundingClientRect();
+
+    const maxX = Math.max(0, area.width - button.width);
+    const maxY = Math.max(0, area.height - button.height);
+
+    const randomX = Math.random() * maxX;
+    const randomY = Math.random() * maxY;
+
+    noBtn.style.position = 'absolute';
+    noBtn.style.left = randomX + 'px';
+    noBtn.style.top = randomY + 'px';
+
+    const hints = [
+        "nice try 😌",
+        "nope, try again",
+        "wrong button, pretty girl",
+        "the universe says otherwise",
+        "HAHA not so fast",
+        "are you sure about that? 👀",
+        "this button has commitment issues",
+        "just press yes already 😭"
+    ];
+
+    document.getElementById('hint').innerText =
+        hints[Math.floor(Math.random() * hints.length)];
+}
+
+noBtn.addEventListener('mouseenter', moveNoButton);
+
+noBtn.addEventListener('touchstart', function(e) {
+    e.preventDefault();
+    moveNoButton();
+}, { passive: false });
+
+noBtn.addEventListener('click', function(e) {
+    e.preventDefault();
+    moveNoButton();
+});
+
+
+// YES BUTTON
+
+function sayYes() {
+
+    pages.forEach(page => page.classList.remove('active'));
+
+    document.getElementById('celebration')
+        .classList.add('show');
+
+    progress.style.width = '100%';
+
+    document.querySelector('.card').style.minHeight = '560px';
+
+    createHearts(60);
+}
+
+
+// Floating hearts
+
+function createHearts(amount) {
+
+    const hearts = ['💗', '💕', '💖', '💘', '♡', '✨'];
+
+    for (let i = 0; i < amount; i++) {
+
+        const heart = document.createElement('div');
+
+        heart.className = 'floating-heart';
+
+        heart.innerText =
+            hearts[Math.floor(Math.random() * hearts.length)];
+
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.top = (50 + Math.random() * 40) + 'vh';
+        heart.style.fontSize = (15 + Math.random() * 25) + 'px';
+        heart.style.animationDuration = (2 + Math.random() * 2) + 's';
+
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 4000);
+    }
+}
+
+</script>
+
+</body>
+</html>
